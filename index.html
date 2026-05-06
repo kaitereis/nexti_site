@@ -1,14 +1,189 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nex TI — Soluções em Infraestrutura e TI</title>
+  <meta name="description" content="Nex TI oferece implantação e gerenciamento de servidores Linux e Windows, gerenciamento de redes e infraestrutura de sistemas com excelência e segurança." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- fullPage.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-    <h1>Nex TI teste 2</h1>
-</body>
 
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <img src="assets/images/logo.png" alt="Nex TI Logo" id="logo-img" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero" data-menuanchor="hero">Início</a></li>
+      <li><a href="#servidores" data-menuanchor="servidores">Servidores</a></li>
+      <li><a href="#redes" data-menuanchor="redes">Redes</a></li>
+      <li><a href="#infraestrutura" data-menuanchor="infraestrutura">Infraestrutura</a></li>
+      <li><a href="#contato" data-menuanchor="contato" class="nav-cta">Contato</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- FULLPAGE WRAPPER -->
+  <div id="fullpage">
+
+    <!-- SEÇÃO 1 — HERO -->
+    <section class="section fp-section" id="section-hero" data-anchor="hero">
+      <div class="bg-image" style="background-image: url('assets/images/hero_bg.png');"></div>
+      <div class="overlay"></div>
+      <div class="section-content hero-content">
+        <div class="hero-logo-wrap">
+          <img src="assets/images/logo.png" alt="Nex TI" class="hero-logo" id="hero-logo" />
+        </div>
+        <h1 class="hero-tagline" id="hero-tagline">
+          Sua infraestrutura de TI<br />
+          <span class="highlight">inteligente e segura.</span>
+        </h1>
+        <p class="hero-sub" id="hero-sub">
+          Soluções completas em servidores, redes e sistemas para empresas que não param.
+        </p>
+        <div class="hero-actions" id="hero-actions">
+          <a href="#servidores" class="btn btn-primary">Conheça nossos serviços</a>
+          <a href="#contato" class="btn btn-outline">Fale conosco</a>
+        </div>
+        <div class="scroll-indicator" id="scroll-indicator">
+          <span>Role para explorar</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2 — SERVIDORES -->
+    <section class="section fp-section" id="section-servidores" data-anchor="servidores">
+      <div class="bg-image" style="background-image: url('assets/images/servers_bg.png');"></div>
+      <div class="overlay overlay--blue"></div>
+      <div class="section-content service-content">
+        <div class="service-badge" id="srv-badge"><i class="fa-solid fa-server"></i></div>
+        <h2 class="service-title" id="srv-title">Servidores Linux &amp; Windows</h2>
+        <p class="service-text" id="srv-text">
+          Implantamos e gerenciamos servidores Linux e Windows sob medida para o seu negócio.
+          Do planejamento à operação, garantimos performance, segurança e disponibilidade contínua —
+          com monitoramento 24/7, aplicação de patches e suporte especializado para manter sua
+          infraestrutura sempre estável e protegida contra ameaças.
+        </p>
+        <ul class="service-features" id="srv-features">
+          <li><i class="fa-solid fa-check"></i> Instalação e configuração de servidores</li>
+          <li><i class="fa-solid fa-check"></i> Gerenciamento e monitoramento remoto</li>
+          <li><i class="fa-solid fa-check"></i> Backup automatizado e recuperação de desastres</li>
+          <li><i class="fa-solid fa-check"></i> Hardening e segurança de sistema operacional</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary" id="srv-btn">Solicitar proposta</a>
+      </div>
+      <div class="section-number">02</div>
+    </section>
+
+    <!-- SEÇÃO 3 — REDES -->
+    <section class="section fp-section" id="section-redes" data-anchor="redes">
+      <div class="bg-image" style="background-image: url('assets/images/network_bg.png');"></div>
+      <div class="overlay overlay--dark"></div>
+      <div class="section-content service-content service-content--right">
+        <div class="service-badge" id="net-badge"><i class="fa-solid fa-network-wired"></i></div>
+        <h2 class="service-title" id="net-title">Gerenciamento de Redes</h2>
+        <p class="service-text" id="net-text">
+          Projetamos e gerenciamos redes corporativas seguras, eficientes e escaláveis.
+          Nossa equipe configura switches, roteadores, firewalls e VPNs para garantir
+          conectividade sem falhas, com segmentação inteligente de rede, controle de acesso
+          e visibilidade total do tráfego em tempo real.
+        </p>
+        <ul class="service-features" id="net-features">
+          <li><i class="fa-solid fa-check"></i> Projeto e implementação de redes LAN/WAN</li>
+          <li><i class="fa-solid fa-check"></i> Configuração de firewalls e VPNs</li>
+          <li><i class="fa-solid fa-check"></i> Monitoramento e análise de tráfego</li>
+          <li><i class="fa-solid fa-check"></i> Wi-Fi corporativo e controle de acesso</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary" id="net-btn">Solicitar proposta</a>
+      </div>
+      <div class="section-number">03</div>
+    </section>
+
+    <!-- SEÇÃO 4 — INFRAESTRUTURA -->
+    <section class="section fp-section" id="section-infra" data-anchor="infraestrutura">
+      <div class="bg-image" style="background-image: url('assets/images/infrastructure_bg.png');"></div>
+      <div class="overlay overlay--blue"></div>
+      <div class="section-content service-content">
+        <div class="service-badge" id="inf-badge"><i class="fa-solid fa-building-columns"></i></div>
+        <h2 class="service-title" id="inf-title">Infraestrutura de Sistemas</h2>
+        <p class="service-text" id="inf-text">
+          Construímos e sustentamos a base tecnológica que move o seu negócio.
+          Virtualização, armazenamento, cloud híbrida e gestão de ativos de TI integrados
+          em uma arquitetura robusta e escalável. Reduzimos custos operacionais e aumentamos
+          a resiliência dos seus sistemas com soluções modernas e eficientes.
+        </p>
+        <ul class="service-features" id="inf-features">
+          <li><i class="fa-solid fa-check"></i> Virtualização com VMware, Hyper-V e Proxmox</li>
+          <li><i class="fa-solid fa-check"></i> Storage e NAS corporativo</li>
+          <li><i class="fa-solid fa-check"></i> Cloud híbrida e migração de sistemas</li>
+          <li><i class="fa-solid fa-check"></i> Gestão de ativos e inventário de TI</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary" id="inf-btn">Solicitar proposta</a>
+      </div>
+      <div class="section-number">04</div>
+    </section>
+
+    <!-- SEÇÃO 5 — CONTATO / FOOTER -->
+    <section class="section fp-section" id="section-contato" data-anchor="contato">
+      <div class="bg-image" style="background-image: url('assets/images/contact_bg.png');"></div>
+      <div class="overlay overlay--dark"></div>
+      <div class="section-content contact-content">
+        <h2 class="contact-title" id="ct-title">Vamos conversar?</h2>
+        <p class="contact-sub" id="ct-sub">
+          Entre em contato e descubra como a Nex TI pode transformar a infraestrutura da sua empresa.
+        </p>
+        <div class="contact-cards" id="ct-cards">
+          <a href="https://wa.me/5500000000000" target="_blank" class="contact-card" id="ct-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+          <a href="mailto:contato@nexti.com.br" class="contact-card" id="ct-email">
+            <i class="fa-solid fa-envelope"></i>
+            <span>E-mail</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="contact-card" id="ct-linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+        <footer class="site-footer" id="ct-footer">
+          <img src="assets/images/logo.png" alt="Nex TI" class="footer-logo" />
+          <p class="footer-copy">&copy; 2025 Nex TI. Todos os direitos reservados.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </footer>
+      </div>
+      <div class="section-number">05</div>
+    </section>
+
+  </div><!-- /#fullpage -->
+
+  <!-- fullPage.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+</body>
 </html>
