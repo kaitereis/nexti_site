@@ -188,4 +188,98 @@ document.addEventListener('DOMContentLoaded', function () {
       hamburger.classList.remove('active');
     });
   });
+
+  // ─── Pull-to-refresh (mobile, hero only) ──────────────────
+  initPullToRefresh();
 });
+
+// ─── Pull-to-refresh ─────────────────────────────────────────
+function initPullToRefresh() {
+  // Only on touch devices
+  if (!('ontouchstart' in window)) return;
+
+  const THRESHOLD   = 80;   // px to drag before triggering reload
+  const MAX_PULL    = 120;  // max visual pull distance
+  let currentSection = 0;
+
+  // Track current section index via fullPage API
+  document.addEventListener('fp:afterLoad', (e) => {
+    currentSection = e.detail?.destination?.index ?? 0;
+  });
+  // Also hook into the afterLoad via a MutationObserver on .fp-section.active
+  const fpSections = document.querySelectorAll('.fp-section');
+  const sectionObs = new MutationObserver(() => {
+    fpSections.forEach((s, i) => {
+      if (s.classList.contains('active')) currentSection = i;
+    });
+  });
+  fpSections.forEach(s => sectionObs.observe(s, { attributes: true, attributeFilter: ['class'] }));
+
+  // Create indicator element
+  const indicator = document.createElement('div');
+  indicator.id = 'ptr-indicator';
+  indicator.innerHTML = `
+    <div id="ptr-spinner"></div>
+    <span id="ptr-label">Solte para atualizar</span>
+  `;
+  document.body.appendChild(indicator);
+
+  let touchStartY = 0;
+  let pulling     = false;
+  let triggered   = false;
+
+  document.addEventListener('touchstart', (e) => {
+    if (currentSection !== 0) return;
+    touchStartY = e.touches[0].clientY;
+    pulling     = false;
+    triggered   = false;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (currentSection !== 0) return;
+
+    const deltaY = e.touches[0].clientY - touchStartY;
+    if (deltaY <= 0) {
+      // Swiping up — reset
+      resetIndicator();
+      return;
+    }
+
+    pulling = true;
+    const pull = Math.min(deltaY * 0.5, MAX_PULL); // dampen movement
+
+    // Show and move indicator
+    indicator.style.transform = `translateX(-50%) translateY(${pull}px)`;
+    indicator.style.opacity   = String(Math.min(pull / THRESHOLD, 1));
+
+    if (pull >= THRESHOLD * 0.7) {
+      indicator.classList.add('ptr-ready');
+    } else {
+      indicator.classList.remove('ptr-ready');
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (!pulling || triggered) return;
+
+    const indicatorY = parseFloat(indicator.style.transform.match(/translateY\(([^)]+)px\)/)?.[1] || 0);
+
+    if (indicatorY >= THRESHOLD * 0.5) {
+      triggered = true;
+      indicator.classList.add('ptr-loading');
+      document.getElementById('ptr-label').textContent = 'Atualizando…';
+
+      // Short delay so the user sees the spinner
+      setTimeout(() => window.location.reload(), 600);
+    } else {
+      resetIndicator();
+    }
+  }, { passive: true });
+
+  function resetIndicator() {
+    pulling = false;
+    indicator.style.transform = 'translateX(-50%) translateY(0px)';
+    indicator.style.opacity   = '0';
+    indicator.classList.remove('ptr-ready', 'ptr-loading');
+  }
+}
