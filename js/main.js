@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
     easingcss3:         'cubic-bezier(0.77, 0, 0.175, 1)',
     css3:               true,
     fitToSection:       true,
-    scrollOverflow:     false,
+    scrollOverflow:     true,
 
     afterLoad: function (origin, destination, direction) {
       const idx = destination.index;
