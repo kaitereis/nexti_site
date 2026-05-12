@@ -4,6 +4,63 @@
            #2764F3 Royal Blue | #163C90 Marian Blue
    ============================================================ */
 
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+
+/* Esconde cursor nativo em desktop */
+@media (pointer: fine) {
+  *, *::before, *::after { cursor: none !important; }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: opacity 0.3s, background 0.3s;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(39, 100, 243, 0.7);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: opacity 0.3s, border-color 0.3s, background 0.3s;
+  background: transparent;
+}
+
+/* Estado: hover sobre links/botões — anel expande e preenche */
+.cursor-ring.is-hovered {
+  border-color: var(--royal);
+  background: rgba(39, 100, 243, 0.12);
+}
+
+/* Estado: cursor sobre elemento clicável — ponto some, anel vira filled */
+.cursor-dot.is-hovered {
+  opacity: 0;
+}
+
+/* Telas touch: oculta os cursores customizados */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+}
+
 :root {
   --platinum: #E5E5E5;
   --battleship: #8A8B8E;
@@ -179,14 +236,10 @@ ul {
   transform: scale(1);
 }
 
-/* Hero: sem zoom e sem overlay */
+/* Hero: sem zoom — mantém overlay padrão */
 #section-hero .bg-image {
   transform: scale(1) !important;
   transition: none;
-}
-
-#section-hero .overlay {
-  display: none;
 }
 
 .overlay {
@@ -311,7 +364,8 @@ ul {
 .scroll-indicator i {
   animation: bounce 1.8s infinite;
   color: var(--royal);
-  will-change: transform; /* isola o bounce na GPU sem afetar siblings */
+  will-change: transform;
+  /* isola o bounce na GPU sem afetar siblings */
 }
 
 @keyframes bounce {
@@ -423,10 +477,10 @@ ul {
 .service-text {
   font-family: var(--font-body);
   font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-  color: var(--battleship);
+  color: #fff;
   line-height: 1.8;
   max-width: 560px;
-  text-align: center;
+  text-align: left;
   opacity: 0;
   will-change: filter, transform, opacity;
 }
@@ -711,7 +765,8 @@ a[href*="alvarotrigo.com/fullPage"] {
    ============================================================ */
 #ptr-indicator {
   position: fixed;
-  top: -56px;          /* starts hidden above viewport */
+  top: -56px;
+  /* starts hidden above viewport */
   left: 50%;
   transform: translateX(-50%) translateY(0px);
   z-index: 9999;
@@ -760,5 +815,7 @@ a[href*="alvarotrigo.com/fullPage"] {
 }
 
 @keyframes ptr-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

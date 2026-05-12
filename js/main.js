@@ -283,3 +283,94 @@ function initPullToRefresh() {
     indicator.classList.remove('ptr-ready', 'ptr-loading');
   }
 }
+
+// ─── Custom Cursor ────────────────────────────────────────────
+function initCustomCursor() {
+  // Não roda em dispositivos touch
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+
+  let mouseX = -100, mouseY = -100;
+  let ringX  = -100, ringY  = -100;
+  let isHovered = false;
+
+  // Segue o mouse em tempo real (dot) + lag para o ring
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // RAF loop: dot segue instantâneo, ring com lerp suave
+  (function render() {
+    // Dot: posição direta
+    gsap.set(dot, { x: mouseX, y: mouseY });
+
+    if (!isHovered) {
+      // Ring: interpolação suave (lerp factor 0.12)
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      gsap.set(ring, { x: ringX, y: ringY });
+    }
+
+    requestAnimationFrame(render);
+  })();
+
+  // ── Hover sobre elementos interativos ──
+  const hoverTargets = document.querySelectorAll(
+    'a, button, .btn, .contact-card, .service-badge, .nav-hamburger, #fp-nav ul li a'
+  );
+
+  hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      isHovered = true;
+      dot.classList.add('is-hovered');
+      ring.classList.add('is-hovered');
+
+      const box = el.getBoundingClientRect();
+      const cx  = box.left + box.width / 2;
+      const cy  = box.top  + box.height / 2;
+      const size = Math.max(box.width, box.height) * 1.1;
+
+      gsap.to(ring, {
+        duration: 0.25,
+        x: cx,
+        y: cy,
+        width: size,
+        height: size,
+        ease: 'power2.out'
+      });
+    });
+
+    el.addEventListener('mouseleave', () => {
+      isHovered = false;
+      dot.classList.remove('is-hovered');
+      ring.classList.remove('is-hovered');
+
+      gsap.to(ring, {
+        duration: 0.35,
+        width: 36,
+        height: 36,
+        ease: 'back.out(1.5)'
+      });
+    });
+  });
+
+  // Desaparece ao sair da janela
+  document.addEventListener('mouseleave', () => {
+    gsap.to([dot, ring], { duration: 0.3, opacity: 0 });
+  });
+  document.addEventListener('mouseenter', () => {
+    gsap.to([dot, ring], { duration: 0.3, opacity: 1 });
+  });
+}
+
+// Chama initCustomCursor dentro do DOMContentLoaded (já definido acima)
+// Não podemos reabrir o evento, então chamamos logo após:
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCustomCursor);
+} else {
+  initCustomCursor();
+}
+
